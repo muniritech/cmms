@@ -1,0 +1,18 @@
+# GAP LIST — CMMS Project (Phase 2)
+
+## Comparison of needs vs what's available
+
+| # | Need | Gap | Why it matters | How to fix | Cost/risk |
+|---|---|---|---|---|---|
+| 1 | Backend API + DB + scheduler | Workspace contains an untracked FastAPI `/health` skeleton; FastAPI/Uvicorn/SQLAlchemy/APScheduler are available only in Hermes Python environment, not pinned as app dependencies. No CMMS schema/scheduler verified. | Core foundation; environment-only dependencies are not reproducible. | After approval, add project-scoped dependencies, SQLite schema, idempotent PPM generation and tests. | Medium dev effort; low runtime cost; local-server availability/backup risk |
+| 2 | RBAC + audit log | None | Security baseline | SQLAlchemy models for User/Role/Permission + middleware audit hook | Medium (rebuild) |
+| 3 | Web admin dashboard | No verified React/Vite app; workspace package.json currently declares Playwright only. | Staff need asset, PPM, breakdown, dashboard, and export workflows. | After approval, create React/Vite PWA with accessible forms, tables, filters, and charts. | Medium; UI and training effort |
+| 4 | Android-accessible mobile experience | PWA accepted, but no verified PWA app. Flutter, Dart, Java, Android SDK/ADB not found. | QR scans, fault reports, photos, and technician tasks need Android access. | PWA first; verify camera, offline queue, and push on target phones; native Android only if PWA proves insufficient. | PWA low-to-medium; native adds setup and maintenance |
+| 5 | Excel import | None | Migration from current Excel sheets | pandas/openpyxl import module with validation + error report | Low (module) |
+| 6 | PDF/Excel export + QR | None | Reports, labels, audit pack | ReportLab PDF; openpyxl Excel; qrcode lib | Low (modules) |
+| 7 | Notifications | No delivery service configured; email/push credentials and accounts absent. | PPM reminders and overdue escalation are core workflows. | In-app first; configurable email via hospital SMTP; validate PWA push. Keep WhatsApp optional and verify current Pakistan providers/prices before recommending. | Medium; depends on connectivity/accounts; WhatsApp cost unverified |
+| 8 | Tests, linting, reproducible dependencies | No verified project test runner or lint config; packages are environment-level and unpinned. | Repeatable setup and reliable releases. | Add pinned project manifests, pytest/API tests, frontend tests, and smoke tests after Gate 3. | Medium initial setup; low ongoing cost |
+| 9 | Local-server deployment, security, and backups | Docker CLI installed but daemon connection failed; no deployment/backup configuration verified. | Local host uptime, access, and recoverability need clear ownership. | After approval, confirm hospital server details; document HTTPS/LAN, least privilege, encrypted off-device backup and restore drills; cloud fallback. | Medium; hardware, power, IT support and backup media unknown |
+| 10 | Documentation, proposal, SHCC adaptation | IDEA/BRIEF and preliminary setup notes/playbooks exist; Part A/Part B not prepared; no SHCC checklist provided. | Management approval and audit material need clear, verifiable documentation. | After Gate 3, prepare Part A then Part B; mark all SHCC-related items exactly “to be verified against the official SHCC checklist.” | Low-to-medium; SHCC checklist is an external dependency |
+
+**Gate 2:** Review this gap list before any further setup or additional installs. The workspace currently also contains untracked `backend/app.py`, `package.json`, `package-lock.json`, `node_modules/`, and `docs/GAP_LIST.md`; those untracked items are being left untouched pending approval and provenance clarification.
