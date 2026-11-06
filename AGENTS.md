@@ -40,6 +40,12 @@ docs/       - Plans, skills, proposals
 - Unit/integration tests pass
 - Documentation updated
 
+## Repository
+- Remote: `https://github.com/muniritech/cmms.git` (branch `main`)
+- Push requires Git Credential Manager sign-in (GitHub user `muniritech`); the repo-local
+  `credential.helper` points at the system GCM because the Hermes-bundled Git's
+  `helper-selector` is missing from its own exec-path.
+
 ## Rules from Brief
 - Plan, act, verify, log.
 - Small tasks.

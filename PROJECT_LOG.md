@@ -46,4 +46,27 @@
 
 ---
 
+## Session: 2026-11-06 (GitHub sync)
+
+### Done
+- Added `.gitignore` (excludes `node_modules/`, venvs, `.env`, local DBs and backups).
+- Renamed local branch `master` → `main` to match the remote default branch.
+- Added remote `origin` = `https://github.com/muniritech/cmms.git`.
+- Committed all Phase 0–2 documentation as `06faf72`.
+- Authenticated to GitHub via Git Credential Manager and pushed `main`.
+- Verified: remote `refs/heads/main` == local HEAD `06faf72`; file tree confirmed through the GitHub API.
+
+### Decisions / notes
+- No GitHub credentials were stored on this machine; the interactive GCM sign-in (user `muniritech`) was completed and the token now lives in Windows Credential Manager.
+- Repo-local `credential.helper` was set to the system GCM (`C:/Program Files/Git/ucrt64/bin/git-credential-manager.exe`), because the Hermes-bundled Git's configured `helper-selector` does not exist in its own exec-path. This is a **local** repo setting; no global git config was changed.
+- Empty directories `web/`, `mobile/`, `scripts/`, `tests/` are not tracked by Git (Git stores no empty directories). They will appear once they hold files.
+- `package.json` / `package-lock.json` currently declare only Playwright — an apparent leftover artifact, not a CMMS dependency. Kept in the repo so nothing is lost; candidate for removal later.
+
+### Next steps
+- Still waiting at **Gate 2** (gap list review).
+- After Gate 2: complete setup and verification, then pause for Gate 3.
+- After Gate 3: Part A plan, Part B proposal, then MVP build.
+
+---
+
 *Last updated: 2026-11-06*
